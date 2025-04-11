@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>East West College - 3D Landing Page</title>
+  <!-- Fonts and Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a192f; /* Dark blue background */
+      color: #ccd6f6; /* Light text color */
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Pop-up Image Overlay */
+    #popup-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    #popup-overlay img {
+      max-width: 80%;
+      max-height: 80%;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+      animation: scaleUp 0.5s ease-in-out;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      width: 100%;
+      background: rgba(10, 25, 47, 0.9); /* Semi-transparent dark blue */
+      padding: 20px 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    header .logo img {
+      height: 60px; /* Increased logo size */
+      margin-right: 15px;
+    }
+
+    header h1 {
+      font-size: 36px; /* Increased font size */
+      color: #64ffda; /* Teal accent color */
+    }
+
+    header nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    header nav ul li {
+      margin-left: 20px;
+    }
+
+    header nav ul li a {
+      color: #ccd6f6;
+      font-size: 16px;
+      transition: color 0.3s ease-in-out;
+    }
+
+    header nav ul li a:hover {
+      color: #64ffda; /* Teal accent color */
+    }
+    /* Hero Section */
+    #hero {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      perspective: 1000px;
+    }
+
+    #hero h1 {
+      font-size: 5rem;
+      color: #64ffda; /* Teal accent color */
+      transform: translateZ(100px);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    #hero p {
+      max-width: 800px;
+      font-size: 1.5rem;
+      margin: 20px 0;
+      color: #ccd6f6;
+      transform: translateZ(50px);
+      animation: fadeInUp 2s ease-in-out;
+    }
+
+    #hero button {
+      padding: 15px 30px;
+      font-size: 1.2rem;
+      color: #0a192f;
+      background: #64ffda; /* Teal accent color */
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      animation: pulse 2s infinite;
+    }
+
+    #hero button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 20px rgba(100, 255, 218, 0.5);
+    }
+
+    /* 3D Background Animation */
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('images/collegebuilding.jpg') no-repeat center center/cover;
+      z-index: -1;
+      transform: translateZ(-500px) scale(2);
+      animation: rotateBackground 20s linear infinite;
+    }
+
+    /* Scrolling Notice Bar - Alternative Design */
+    .notice-bar {
+      width: 100%;
+      overflow: hidden;
+      white-space: nowrap;
+      background: linear-gradient(90deg, #112240, #0a192f, #112240); /* Gradient background */
+      color: #64ffda; /* Teal accent color */
+      padding: 15px 0;
+      position: relative;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .notice-content {
+      display: inline-block;
+      padding-left: 100%; /* Start off-screen */
+      animation: scrollText 25s linear infinite;
+    }
+
+    .notice-content span {
+      margin-right: 40px; /* Space between notices */
+      font-size: 1.1rem;
+      font-weight: 500;
+      padding: 5px 10px;
+      background: rgba(100, 255, 218, 0.1); /* Light teal background */
+      border-radius: 5px;
+      transition: background 0.3s ease;
+    }
+
+    .notice-content span:hover {
+      background: rgba(100, 255, 218, 0.2); /* Hover effect */
+    }
+
+    @keyframes scrollText {
+      0% {
+        transform: translateX(100%);
+      }
+      100% {
+        transform: translateX(-100%);
+      }
+    }
+
+ 
+    /* About Us */
+    #about {
+      padding: 100px 20px;
+      background: #112240; /* Darker blue background */
+      text-align: center;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    #about h2 {
+      font-size: 3rem;
+      color: #64ffda; /* Teal accent color */
+      margin-bottom: 20px;
+    }
+
+    #about p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      color: #a8b2d1; /* Light gray text */
+    }
+
+    /* Departments Section */
+    #departments {
+      padding: 100px 20px;
+      background: #0a192f; /* Dark blue background */
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    #departments h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 3rem;
+      color: #64ffda; /* Teal accent color */
+    }
+
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: #112240; /* Darker blue background */
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-10px) rotateX(10deg) rotateY(10deg);
+      box-shadow: 0 6px 20px rgba(100, 255, 218, 0.3);
+    }
+
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.1);
+    }
+
+    .card h3 {
+      margin: 15px;
+      font-size: 1.5rem;
+      color: #64ffda; /* Teal accent color */
+    }
+
+    .card p {
+      margin: 0 15px 15px;
+      color: #a8b2d1; /* Light gray text */
+    }
+
+    .card a {
+      color: #64ffda; /* Teal accent color */
+      font-weight: bold;
+      transition: color 0.3s ease-in-out;
+    }
+
+    .card a:hover {
+      color: #52d1b2; /* Darker teal */
+    }
+
+    /* Apply Now Section */
+    #apply-now {
+      padding: 100px 20px;
+      background: #112240; /* Darker blue background */
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    #apply-now h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 3rem;
+      color: #64ffda; /* Teal accent color */
+    }
+
+    #apply-now form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #0a192f; /* Dark blue background */
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    #apply-now form div {
+      margin-bottom: 15px;
+    }
+
+    #apply-now form label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+      color: #64ffda; /* Teal accent color */
+    }
+
+    #apply-now form input,
+    #apply-now form select,
+    #apply-now form button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #233554; /* Darker border */
+      border-radius: 5px;
+      background: #112240; /* Darker blue background */
+      color: #ccd6f6; /* Light text color */
+    }
+
+    #apply-now form button {
+      background: #64ffda; /* Teal accent color */
+      color: #0a192f;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease-in-out;
+    }
+
+    #apply-now form button:hover {
+      background: #52d1b2; /* Darker teal */
+    }
+
+    /* Confirmation Message */
+    #confirmation {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      border-radius: 5px;
+    }
+
+    /* Events Section */
+    #events {
+      padding: 100px 20px;
+      background: #0a192f; /* Dark blue background */
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    #events h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 3rem;
+      color: #64ffda; /* Teal accent color */
+    }
+
+    .events-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .event-card {
+      background: #112240; /* Darker blue background */
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 20px rgba(100, 255, 218, 0.3);
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .event-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .event-card h3 {
+      margin: 15px;
+      font-size: 1.5rem;
+      color: #64ffda; /* Teal accent color */
+    }
+
+    .event-card p {
+      margin: 0 15px 15px;
+      color: #a8b2d1; /* Light gray text */
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes scaleUp {
+      from {
+        transform: scale(0.8);
+      }
+      to {
+        transform: scale(1);
+      }
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-20px);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    @keyframes rotateBackground {
+      0% {
+        transform: translateZ(-500px) scale(2) rotate(0deg);
+      }
+      100% {
+        transform: translateZ(-500px) scale(2) rotate(360deg);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Pop-up Image Overlay -->
+  <div id="popup-overlay">
+    <img src="images/admission.jpg" alt="Welcome to East West Polytechnic">
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="images/logo.png" alt="East West College Logo">
+        <h5>East West Polytechnic</h5>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#departments">Departments</a></li>
+          <li><a href="apply-now.html">Apply Now</a></li>
+          <li><a href="founder.html">Founder</a></li>
+          <li><a href="principal.html">Principal</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="fee-structure.html">fee-structure</a></li>
+          <li><a href="toppers.html">Toppers</a></li>
+          <li><a href="id.html">Id card</a></li>
+          
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="hero">
+    <h1>Welcome to East West Polytechnic</h1>
+    <p>Shaping the future of education through innovation, commitment, and excellence.</p>
+    <button onclick="openAdmissionPopup()">Apply Now</button>
+  </section>
+
+  <!-- Scrolling Notice Bar -->
+<div class="notice-bar">
+  <div class="notice-content">
+    <span>Important Notice: Admissions are now open for the academic year 2025-26. Apply now!</span>
+    <span>Upcoming Event: Annual Tech Fest on 15th April 2025.</span>
+    <span>Scholarship applications are now open. Deadline: 20 March 2025.</span>
+    <span>Sports day on 6th March 2025.</span>
+  </div>
+</div>
+
+
+  <!-- About Us -->
+  <section id="about">
+    <h2>About Us</h2>
+    <p>East West College is dedicated to providing world-class education and shaping the leaders of tomorrow through innovation and excellence.
+      East West Polytechnic College, Anjananagar, is a premier institution dedicated to providing high-quality technical education and fostering innovation in the field of engineering and technology. Located in the heart of Anjananagar, the college is renowned for its state-of-the-art infrastructure, experienced faculty, and commitment to academic excellence.
+To be a leading polytechnic college that empowers students with technical knowledge, practical skills, and ethical values, enabling them to excel in their careers and contribute to society.
+    </p>
+  </section>
+
+  <!-- Departments -->
+  <section id="departments">
+    <h2>Our Departments</h2>
+    <div class="cards-container">
+      <div class="card">
+        <img src="images/computerscience.jpg" alt="Computer Science">
+        <h3><a href="department-cs.html">Computer Science</a></h3>
+        <p>Explore cutting-edge technologies and shape the future of computing.</p>
+      </div>
+      <div class="card">
+        <img src="images/mech.jpg" alt="Mechanical Engineering">
+        <h3><a href="department-me.html">Mechanical Engineering</a></h3>
+        <p>Design and build innovative mechanical systems.</p>
+      </div>
+      <div class="card">
+        <img src="images/elec.jpg" alt="Electrical Engineering">
+        <h3><a href="department-eee.html">Electrical Engineering</a></h3>
+        <p>Master the power of electricity and its applications.</p>
+      </div>
+    </div>
+  </section>
+
+<!-- Apply Now -->
+<section id="apply-now">
+  <h2>Apply Now</h2>
+  <form id="applicationForm" action="https://formspree.io/f/xbldyjvg" method="POST">
+    <div>
+      <label for="studentName">Student Name</label>
+      <input type="text" id="studentName" name="studentName" required>
+    </div>
+    <div>
+      <label for="fatherName">Father's Name</label>
+      <input type="text" id="fatherName" name="fatherName" required>
+    </div>
+    <div>
+      <label for="motherName">Mother's Name</label>
+      <input type="text" id="motherName" name="motherName" required>
+    </div>
+    <div>
+      <label for="dob">Date of Birth</label>
+      <input type="date" id="dob" name="dob" required> 
+    </div>
+    <div>
+      <label for="course">Select Course</label>
+      <select id="course" name="course" required>
+        <option value="">--Select--</option>
+        <option value="Computer Science">Computer Science</option>
+        <option value="Mechanical Engineering">Mechanical Engineering</option>
+        <option value="Electrical Engineering">Electrical Engineering</option>
+      </select>
+    </div>
+    <div>
+      <label for="phone">Phone Number</label>
+      <input type="tel" id="phone" name="phone" required>
+    </div>
+    <div>
+      <label for="address">Address</label>
+      <input type="text" id="address" name="address" required>
+    </div>
+    <div>
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
+  <div id="confirmation" style="display:none;">Thank you for applying. Your application has been submitted!</div>
+</section>
+  <div id="confirmation" style="display:none;">Thank you for applying. Your application has been submitted!</div>
+  </section>
+
+  <!-- Events Section -->
+  <section id="events">
+    <h2>College Events</h2>
+    <div class="events-container">
+      <div class="event-card">
+        <img src="images/day5.jpeg" alt="Event 1">
+        <h3>Annual Tech Fest</h3>
+        <p>Join us for a celebration of innovation and technology.</p>
+      </div>
+      <div class="event-card">
+        <img src="images/day1.jpg" alt="Event 2">
+        <h3>Cultural Night</h3>
+        <p>Experience the vibrant culture of our college community.</p>
+      </div>
+      <div class="event-card">
+        <img src="images/sports.jpeg" alt="Event 3">
+        <h3>Sports Day</h3>
+        <p>Cheer for your favorite teams in our annual sports event.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Founder - East West College</title>
+  <!-- Fonts and Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a192f; /* Dark blue background */
+      color: #ccd6f6; /* Light text color */
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      width: 100%;
+      background: rgba(10, 25, 47, 0.9); /* Semi-transparent dark blue */
+      padding: 20px 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    header .logo img {
+      height: 60px;
+      margin-right: 15px;
+    }
+
+    header h1 {
+      font-size: 50px;
+      color: #64ffda; /* Teal accent color */
+    }
+
+    header nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    header nav ul li {
+      margin-left: 20px;
+    }
+
+    header nav ul li a {
+      color: #ccd6f6;
+      font-size: 16px;
+      transition: color 0.3s ease-in-out;
+    }
+
+    header nav ul li a:hover {
+      color: #64ffda; /* Teal accent color */
+    }
+
+    /* Founder Section */
+    #founder {
+      padding: 150px 20px 100px; /* Adjusted padding to account for fixed header */
+      background: #112240; /* Darker blue background */
+      text-align: center;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    #founder h2 {
+      font-size: 3rem;
+      color: #64ffda; /* Teal accent color */
+      margin-bottom: 20px;
+    }
+
+    #founder img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      border: 5px solid #64ffda; /* Teal accent color */
+    }
+
+    #founder p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      color: #a8b2d1; /* Light gray text */
+      line-height: 1.8;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="images/logo.png" alt="East West College Logo">
+        <h1>East West College</h1>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="index.html#departments">Departments</a></li>
+          <li><a href="index.html#apply-now">Apply Now</a></li>
+          <li><a href="founder.html">Founder</a></li>
+          <li><a href="principal.html">Principal</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="fee-structure.html">fee-structure</a></li>
+          <li><a href="quize/login.html">Quize</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header><br><br>
+
+  <!-- Founder Section -->
+  <section id="founder">
+    <h2>Our Founder</h2>
+    <img src="images/founder.jpg" alt="Founder of East West College">
+    <p>
+        The institution was founded by Former BBMP Mayor Late Sri. C. M. Nagaraj, a visionary,an acknowledged educationalist, a philanthropist and a social worker, as it was one of his great dream project. His prime motto, was to provide a matchless educational assistance to every student of all respective classes. He devoted his precious time, efforts, and life to interpret his ambition into a reality.
+
+        Now, the institutions are taken care by his son Sri. C. N. Ravikiran, Chairman with the aim to achieve academic excellence on par with Global Standards, following the principles of his father. The institutions are now, a treasure house of knowledge to thousands of zealous students’ community across the globe. The institutions uphold its unflinching fame in all respects of academics and is exhilarating 47th year of academic excellence, honing the life of every student with a code of conduct. Under the wings of EAST WEST GROUP OF INSTITUTIONS, many different branches are offering different courses as per the need, and the requirements of students’ career. ”
+        
+        – Sri. Late C.M Nagaraj, Founder Chairman, EWGI
+        
+        
+    </p>
+    <p>
+      His commitment to creating an environment that nurtures creativity, critical thinking, and leadership has made East West College a beacon of learning and innovation. Dr. Nagaraj leadership continues to inspire students and faculty alike to strive for excellence and make a positive impact on the world.
+    </p>
+  </section>
+  <script>
+    // Pop-up Image Overlay
+    const popupOverlay = document.getElementById('popup-overlay');
+  
+    // Hide the pop-up after 3 seconds or when clicked outside
+    setTimeout(() => {
+      popupOverlay.style.display = 'none';
+    }, 3000);
+  
+    popupOverlay.addEventListener('click', () => {
+      popupOverlay.style.display = 'none';
+    });
+  
+    // Hero Image Slider
+    const images = [
+      'images/collegebuilding.jpg',
+      'images/p2.png',
+      'images/p3.png'
+    ];
+  
+    let currentIndex = 0;
+  
+    function changeImage() {
+      const heroSection = document.getElementById('hero');
+      currentIndex = (currentIndex + 1) % images.length;
+      heroSection.style.backgroundImage = `linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.8)), url(${images[currentIndex]})`;
+    }
+  
+    // Start the image slider
+    let sliderInterval = setInterval(changeImage, 5000); // Change image every 5 seconds
+  
+    // Pause the slider on hover (optional)
+    const heroSection = document.getElementById('hero');
+    heroSection.addEventListener('mouseenter', () => {
+      clearInterval(sliderInterval);
+    });
+  
+    heroSection.addEventListener('mouseleave', () => {
+      sliderInterval = setInterval(changeImage, 5000);
+    });
+  
+    // Form Submission Confirmation
+    document.getElementById('applicationForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+  
+      // Get form data
+      const formData = new FormData(this);
+      const data = Object.fromEntries(formData.entries());
+  
+      try {
+        // Send form data to the server
+        const response = await fetch('/apply', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+  
+        const result = await response.json();
+  
+        // Show confirmation message
+        const confirmation = document.getElementById('confirmation');
+        confirmation.textContent = result.message || 'Application submitted successfully!';
+        confirmation.style.display = 'block';
+  
+        // Hide confirmation after 3 seconds
+        setTimeout(() => {
+          confirmation.style.display = 'none';
+        }, 3000);
+  
+        // Reset the form after successful submission
+        this.reset();
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        const confirmation = document.getElementById('confirmation');
+        confirmation.textContent = 'Error submitting application. Please try again.';
+        confirmation.style.display = 'block';
+  
+        // Hide confirmation after 3 seconds
+        setTimeout(() => {
+          confirmation.style.display = 'none';
+        }, 3000);
+      }
+    });
+    // Scrolling Notice Bar Hover Effect
+    const noticeContent = document.querySelector('.notice-content');
+
+    noticeContent.addEventListener('mouseenter', () => {
+      noticeContent.style.animationPlayState = 'paused';
+    });
+
+    noticeContent.addEventListener('mouseleave', () => {
+      noticeContent.style.animationPlayState = 'running';
+    });
+  </script>
+</body>
+</html>
+
+
+
+

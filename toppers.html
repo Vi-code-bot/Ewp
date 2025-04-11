@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toppers - East West College</title>
+  <!-- Fonts and Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a192f; /* Dark blue background */
+      color: #ccd6f6; /* Light text color */
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      width: 100%;
+      background: rgba(10, 25, 47, 0.9); /* Semi-transparent dark blue */
+      padding: 20px 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    header .logo img {
+      height: 60px;
+      margin-right: 15px;
+    }
+
+    header h1 {
+      font-size: 50px;
+      color: #64ffda; /* Teal accent color */
+    }
+
+    header nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    header nav ul li {
+      margin-left: 20px;
+    }
+
+    header nav ul li a {
+      color: #ccd6f6;
+      font-size: 16px;
+      transition: color 0.3s ease-in-out;
+    }
+
+    header nav ul li a:hover {
+      color: #64ffda; /* Teal accent color */
+    }
+
+    /* Toppers Section */
+    #toppers {
+      padding: 150px 20px 100px; /* Adjusted padding to account for fixed header */
+      background: #112240; /* Darker blue background */
+      text-align: center;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    #toppers h2 {
+      font-size: 3rem;
+      color: #64ffda; /* Teal accent color */
+      margin-bottom: 20px;
+    }
+
+    .toppers-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .topper-card {
+      background: #0a192f; /* Dark blue background */
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .topper-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 20px rgba(100, 255, 218, 0.3);
+    }
+
+    .topper-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .topper-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .topper-card h3 {
+      margin: 15px;
+      font-size: 1.5rem;
+      color: #64ffda; /* Teal accent color */
+    }
+
+    .topper-card p {
+      margin: 0 15px 15px;
+      color: #a8b2d1; /* Light gray text */
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="images/logo.png" alt="East West College Logo">
+        <h3>East West polytechnic</h3>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="index.html#departments">Departments</a></li>
+          <li><a href="index.html#apply-now">Apply Now</a></li>
+          <li><a href="founder.html">Founder</a></li>
+          <li><a href="principal.html">Principal</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="fee-structure.html">Fee Structure</a></li>
+          <li><a href="toppers.html">Toppers</a></li>
+          <li><a href="images/quize/home.html">Quize</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header><br><br>
+
+  <!-- Toppers Section -->
+  <section id="toppers">
+    <h2>Our Toppers</h2>
+    <div class="toppers-container">
+      <div class="topper-card">
+        <img src="images/toer1.png" alt="Topper 1">
+        <h3>Sagar</h3>
+        <p>Computer Science - 95%</p>
+      </div>
+      <div class="topper-card">
+        <img src="images/topper2.jpg" alt="Topper 2">
+        <h3>Jane Smith</h3>
+        <p>Mechanical Engineering - 93%</p>
+      </div>
+      <div class="topper-card">
+        <img src="images/topper3.jpg" alt="Topper 3">
+        <h3>Alice Johnson</h3>
+        <p>Electrical Engineering - 92%</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Optional: Add any JavaScript functionality if needed
+  </script>
+</body>
+</html>

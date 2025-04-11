@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Identity Card Registration</title>
+  <style>
+    /* Body background with animated gradient */
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(45deg, #7197dd, #ce9ac0, #71dd93);
+      background-size: 400% 400%;
+      animation: gradientAnimation 10s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    @keyframes gradientAnimation {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+
+    /* Container style */
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 20px;
+      flex-direction: column;
+    }
+
+    /* Card background color */
+    .card {
+      width: 350px;
+      height: 500px;
+      background-color: #edf1f6;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+      display: none; /* Initially hidden */
+    }
+
+    .card-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: url('/Top(1).jpeg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 20px;
+      height: 60px;
+    }
+
+    /* New header with pink background below the logo */
+    .sub-header {
+      background-color: pink;
+      color: black;
+      padding: 10px;
+      width: 110%;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .card-body {
+      padding: 20px;
+      text-align: center;
+      position: relative;
+    }
+
+    .photo {
+      width: 80px;
+      height: 100px;
+      object-fit: cover;
+      margin-top: 20px;
+      border: 2px solid #090909;
+    }
+
+    .student-details {
+      text-align: left;
+    }
+
+    .student-details p {
+      margin: 5px 0;
+    }
+
+    .upload-btn {
+      margin-top: 20px;
+      padding: 10px 15px;
+      background-color: #3b6983;
+      color: white;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    .upload-btn:hover {
+      background-color: #3b6983;
+    }
+
+    .form-container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .form-container input {
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .form-container button {
+      padding: 10px;
+      background-color: #3b6983;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .form-container button:hover {
+      background-color: #3b6983;
+    }
+
+    .photo-preview {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border: 2px solid #4CAF50;
+      margin-bottom: 20px;
+    }
+
+    /* Barcode Styling */
+    .barcode {
+      margin-top: 20px;
+      width: 100%;
+      height: 60px;
+    }
+
+    /* Camera and Download Buttons */
+    .action-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .action-buttons button {
+      padding: 10px 15px;
+      background-color: #3b6983;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .action-buttons button:hover {
+      background-color: #3b6983;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Registration Form -->
+    <div class="form-container" id="registrationForm">
+      <div class="card-header"><br><br>
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWjdolP4UPQK3QfSQJ7BETtdLp1llSwzGNKQ&s" alt="College Logo" style="width: 50%; height: 250%;">
+      </div>
+      <h2>Online ID Card Registration Form</h2>
+      <input type="text" id="name" placeholder="Enter Student Name" required>
+      <input type="text" id="department" placeholder="Enter Department" required>
+      <input type="date" id="dob" placeholder="Enter Date of Birth" required>
+      <input type="text" id="phoneNumber" placeholder="Enter Phone Number" required>
+      <input type="text" id="address" placeholder="Enter Address" required> <!-- Added Address Field -->
+      <input type="text" id="registerNo" placeholder="Enter Register Number" required>
+      <input type="file" id="fileInput" class="upload-btn" accept="image/*" onchange="previewPhoto()">
+      <img src="" id="photoPreview" class="photo-preview" style="display:none;" />
+      <button id="registerButton">Register</button>
+    </div>
+
+    <!-- Student ID Card -->
+    <div class="card" id="idCard">
+      <div class="card-header">
+        <img id="collegeLogo" src="https://lh3.googleusercontent.com/proxy/OKahzJTUcHVJfNOE0uqnimppXjITlqzy42xpkwqgypbi8DzEdTvlpIeYHL_CQURtyTk0_2H857rf_QXfrQP3cKhnQapSgDHsk9mz1ILMISK7HptF" alt="College Logo" style="width: 100%; height: 100%;">
+        <!-- New header with pink background below the logo -->
+        <div class="sub-header">
+          Magadi road, Anjananagar, Banglore-560091
+        </div>
+      </div>
+      <div class="card-body">
+        <img src="" id="cardPhoto" class="photo" alt="Student Photo">
+        <div class="student-details">
+          <center>
+            <p id="cardName"></p>
+            <p><b><span id="cardDepartment"></span></b></p>
+          </center>
+          <p><strong>DOB:</strong> <span id="cardDob"></span></p>
+          <p><strong>Phone:</strong> <span id="cardPhone"></span></p>
+          <p><strong>Address:</strong> <span id="cardAddress"></span></p> <!-- Added Address Field -->
+          <p><strong>Register No:</strong> <span id="cardRegisterNo"></span></p>
+        </div>
+        <!-- Barcode Canvas -->
+        <canvas id="barcodeCanvas" class="barcode"></canvas>
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+          <button id="downloadButton">Download ID Card</button>
+          <button id="cameraButton">Capture Photo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Include JsBarcode Library -->
+  <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.0/dist/JsBarcode.all.min.js"></script>
+  <!-- Include html2canvas Library for Downloading ID Card -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <script>
+    // Preview the uploaded photo
+    function previewPhoto() {
+      const fileInput = document.getElementById("fileInput");
+      const photoPreview = document.getElementById("photoPreview");
+
+      if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function (e) {
+          photoPreview.src = e.target.result;
+          photoPreview.style.display = "block";
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      }
+    }
+
+    // Register button click event
+    document.getElementById("registerButton").addEventListener("click", function () {
+      const name = document.getElementById("name").value;
+      const department = document.getElementById("department").value;
+      const dob = document.getElementById("dob").value;
+      const phoneNumber = document.getElementById("phoneNumber").value;
+      const address = document.getElementById("address").value; // Added Address Field
+      const registerNo = document.getElementById("registerNo").value;
+      const photoPreview = document.getElementById("photoPreview").src;
+
+      if (!name || !department || !dob || !phoneNumber || !address || !registerNo || !photoPreview) {
+        alert("Please fill out all fields and upload a photo.");
+        return;
+      }
+
+      // Convert the date from YYYY-MM-DD to DD/MM/YYYY format
+      let dateObj = new Date(dob);
+      let day = ("0" + dateObj.getDate()).slice(-2);
+      let month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
+      let year = dateObj.getFullYear();
+      let formattedDob = `${day}/${month}/${year}`;
+
+      // Update ID card details
+      document.getElementById("cardName").textContent = name;
+      document.getElementById("cardDepartment").textContent = department;
+      document.getElementById("cardDob").textContent = formattedDob;
+      document.getElementById("cardPhone").textContent = phoneNumber;
+      document.getElementById("cardAddress").textContent = address; // Added Address Field
+      document.getElementById("cardRegisterNo").textContent = registerNo;
+      document.getElementById("cardPhoto").src = photoPreview;
+
+      // Generate barcode for the register number
+      JsBarcode("#barcodeCanvas", registerNo, {
+        format: "CODE128",
+        displayValue: true,
+        textAlign: "center",
+        fontSize: 18
+      });
+
+      // Show the ID card and hide the form
+      document.getElementById("idCard").style.display = "block";
+      document.getElementById("registrationForm").style.display = "none";
+    });
+
+    // Download ID Card as Image
+    document.getElementById("downloadButton").addEventListener("click", function () {
+      const card = document.getElementById("idCard");
+      const buttons = document.querySelector(".action-buttons");
+      buttons.style.display = "none"; // Hide buttons before capturing
+
+      // Ensure the logo is fully loaded before capturing
+      const logo = document.getElementById("collegeLogo");
+      logo.crossOrigin = "Anonymous"; // Allow cross-origin images
+      logo.onload = function () {
+        html2canvas(card).then(canvas => {
+          const link = document.createElement("a");
+          link.download = "student_id_card.png";
+          link.href = canvas.toDataURL("image/png");
+          link.click();
+          buttons.style.display = "flex"; // Show buttons after capturing
+        });
+      };
+      logo.src = logo.src; // Re-trigger the onload event
+    });
+
+    // Capture Live Photo from Camera
+    document.getElementById("cameraButton").addEventListener("click", function () {
+      const video = document.createElement("video");
+      const canvas = document.createElement("canvas");
+      const context = canvas.getContext("2d");
+
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(stream => {
+          video.srcObject = stream;
+          video.play();
+          video.onloadedmetadata = () => {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+            const photo = canvas.toDataURL("image/png");
+            document.getElementById("cardPhoto").src = photo;
+            document.getElementById("photoPreview").src = photo;
+            document.getElementById("photoPreview").style.display = "block";
+            stream.getTracks().forEach(track => track.stop());
+          };
+        })
+        .catch(err => {
+          console.error("Error accessing camera: ", err);
+        });
+    });
+  </script>
+</body>
+</html>

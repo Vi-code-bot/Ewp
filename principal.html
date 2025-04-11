@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Principal - East West College</title>
+  <!-- Fonts and Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a192f; /* Dark blue background */
+      color: #ccd6f6; /* Light text color */
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      width: 100%;
+      background: rgba(10, 25, 47, 0.9); /* Semi-transparent dark blue */
+      padding: 20px 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    header .logo img {
+      height: 60px;
+      margin-right: 15px;
+    }
+
+    header h1 {
+      font-size: 50px;
+      color: #64ffda; /* Teal accent color */
+    }
+
+    header nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    header nav ul li {
+      margin-left: 20px;
+    }
+
+    header nav ul li a {
+      color: #ccd6f6;
+      font-size: 16px;
+      transition: color 0.3s ease-in-out;
+    }
+
+    header nav ul li a:hover {
+      color: #64ffda; /* Teal accent color */
+    }
+
+    /* Principal Section */
+    #principal {
+      padding: 150px 20px 100px; /* Adjusted padding to account for fixed header */
+      background: #112240; /* Darker blue background */
+      text-align: center;
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    #principal h2 {
+      font-size: 3rem;
+      color: #64ffda; /* Teal accent color */
+      margin-bottom: 20px;
+    }
+
+    #principal img {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      margin-bottom: 20px;
+      border: 5px solid #64ffda; /* Teal accent color */
+    }
+
+    #principal p {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.2rem;
+      color: #a8b2d1; /* Light gray text */
+      line-height: 1.8;
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="images/logo.png" alt="East West College Logo">
+        <h3>East West College</h3>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="index.html#departments">Departments</a></li>
+          <li><a href="index.html#apply-now">Apply Now</a></li>
+          <li><a href="founder.html">Founder</a></li>
+          <li><a href="principal.html">Principal</a></li>
+          <li><a href="fee-structure.html">Fee-Structure</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="toppers.html">Toppers</a></li>
+          <li><a href="images/quize/home.html">Quize</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Principal Section -->
+  <section id="principal">
+    <h2>Our Principal</h2>
+    <img src="images/principal.jpeg" alt="Principal of East West College">
+    <p>
+      As a principal of renowned institution, I feel much privileged to place my deep down pranam to “East West, the house of knowledge roots its fruits under the principles laid by Late Sri C M Nagaraj, Founder Chairman of East West Group of Institution, which has spewed it’s radiance on thousands of students turned out today, as matchless entrepreneurs”.
+
+Graduation without the best education is mere worthless in today’s competitive society. East West Polytechnic [EWP], treasures unique skills in every areas of specialization as per needs and demands of industry as well as individual’s interest.
+
+The institute provides vivid learning diploma programs in Civil, Mechanical, Computer Science, Information Science, Electronics, Electrical & Electronics, Mechatronics, Machine Tool Technology and Automobile Engineering.
+
+The prime intent of the institute is to provide a pleasant education to every young mind in possessing the right combination of academic excellence, exemplary character and total humanism. They should serve the motherland and fellowmen and assist to raise the eminence of life to universal standards. The institute holds all the required amenities with much exercised library, laboratories, and skilled team of faculty members with modern teaching services and pedagogy.
+
+East West Polytechnic is dedicated in latest ventures to institute as the best institution in contributing the worth of technical progress and Shape every student individuals into champions with perceptual knowledge to confront the challenges globally.
+
+
+    </p>
+    <p>
+      Under her leadership, East West College has achieved remarkable milestones, including the introduction of cutting-edge programs, state-of-the-art facilities, and a strong emphasis on research and development. Dr. Shylaja S L vision and dedication continue to inspire both students and faculty to reach new heights of academic and personal achievement.
+    </p>
+  </section>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>

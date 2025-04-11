@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>College Events - East West College</title>
+  <!-- Fonts and Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #0a192f; /* Dark blue background */
+      color: #ccd6f6; /* Light text color */
+      line-height: 2.0;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3 {
+      margin: 0;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Header */
+    header {
+      position: fixed;
+      width: 100%;
+      background: rgba(10, 25, 47, 0.9); /* Semi-transparent dark blue */
+      padding: 20px 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    header .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    header .logo img {
+      height: 60px; /* Increased logo size */
+      margin-right: 15px;
+    }
+
+    header h1 {
+      font-size: 36px; /* Increased font size */
+      color: #64ffda; /* Teal accent color */
+    }
+
+    header nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+    }
+
+    header nav ul li {
+      margin-left: 20px;
+    }
+
+    header nav ul li a {
+      color: #ccd6f6;
+      font-size: 16px;
+      transition: color 0.3s ease-in-out;
+    }
+
+    header nav ul li a:hover {
+      color: #64ffda; /* Teal accent color */
+    }
+
+    /* Events Section */
+    #events {
+      padding: 150px 20px 100px; /* Adjusted padding for fixed header */
+      background: #0a192f; /* Dark blue background */
+      animation: fadeInUp 1.5s ease-in-out;
+    }
+
+    #events h2 {
+      text-align: center;
+      margin-bottom: 40px;
+      font-size: 3rem;
+      color: #64ffda; /* Teal accent color */
+    }
+
+    .events-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .event-card {
+      background: #112240; /* Darker blue background */
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .event-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 6px 20px rgba(100, 255, 218, 0.3);
+    }
+
+    .event-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .event-card:hover img {
+      transform: scale(1.1);
+    }
+
+    .event-card h3 {
+      margin: 15px;
+      font-size: 1.5rem;
+      color: #64ffda; /* Teal accent color */
+    }
+
+    .event-card p {
+      margin: 0 15px 15px;
+      color: #a8b2d1; /* Light gray text */
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        transform: translateY(50px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="logo">
+        <img src="images/logo.png" alt="East West College Logo">
+        <h3>East West College</h3>
+      </div>
+      <nav>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="index.html#about">About Us</a></li>
+          <li><a href="index.html#departments">Departments</a></li>
+          <li><a href="index.html#apply-now">Apply Now</a></li>
+          <li><a href="founder.html">Founder</a></li>
+          <li><a href="principal.html">Principal</a></li>
+          <li><a href="fee-structure.html">Fee-Structure</a></li>
+          <li><a href="events.html">Events</a></li>
+          <li><a href="toppers.html">Toppers</a></li>
+          <li><a href="images/quize/home.html">Quize</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Events Section -->
+  <section id="events">
+    <h2>College Events</h2>
+    <div class="events-container">
+      <!-- Event 1 -->
+      <div class="event-card">
+        <img src="images/day5.jpeg" alt="Annual Tech Fest">
+        <h3>Annual Tech Fest</h3>
+        <p>Join us for a celebration of innovation and technology. Participate in coding competitions, robotics challenges, and tech talks.</p>
+      </div>
+      <!-- Event 2 -->
+      <div class="event-card">
+        <img src="images/day1.jpg" alt="Cultural Night">
+        <h3>Cultural Night</h3>
+        <p>Experience the vibrant culture of our college community with music, dance, and performances from around the world.</p>
+      </div>
+      <!-- Event 3 -->
+      <div class="event-card">
+        <img src="images/sports.jpeg" alt="Sports Day">
+        <h3>Sports Day</h3>
+        <p>Cheer for your favorite teams in our annual sports event featuring cricket, football, and athletics.</p>
+      </div>
+      <!-- Event 4 -->
+      <div class="event-card">
+        <img src="images/day2.jpeg" alt="Science Fair">
+        <h3>Science Fair</h3>
+        <p>Explore groundbreaking projects and experiments by our students in physics, chemistry, and biology.</p>
+      </div>
+      <!-- Event 5 -->
+      <div class="event-card">
+        <img src="images/day4.jpeg" alt="Alumni Meet">
+        <h3>Alumni Meet</h3>
+        <p>Reconnect with former students and share your experiences with the current generation of learners.</p>
+      </div>
+      <!-- Event 6 -->
+      <div class="event-card">
+        <img src="images/day3.avif" alt="Workshop on AI">
+        <h3>Workshop on AI</h3>
+        <p>Learn about the latest advancements in Artificial Intelligence and Machine Learning from industry experts.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+  </script>
+</body>
+</html>
